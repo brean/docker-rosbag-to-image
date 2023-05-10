@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  rosbag_to_image:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      args:
+        ROS_DISTRO: noetic
+    volumes:
+      - ./rosbags:/rosbags/:rw
+      - ./export.launch:/root/export.launch:ro
+      - ./ros:/root/.ros:rw
+    command: ["roslaunch", "/root/export.launch"]
